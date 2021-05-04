@@ -1,5 +1,5 @@
+//#define RUN
 #ifdef RUN
-
 #ifdef __APPLE_CC__
 #include <GLUT/glut.h>
 #else
