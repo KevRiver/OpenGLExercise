@@ -6,7 +6,6 @@
 #include <GL/freeglut.h>
 #include "constants.h"
 #include "cube.h"
-#include "mouse_callback.h"
 #include "Ex3.h"
 
 int main(int argc, char** argv) {

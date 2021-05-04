@@ -7,43 +7,8 @@
 #endif
 
 namespace Ex3 {
-	lDownAtLeftEventListener::lDownAtLeftEventListener() { 
-		MouseCallback::lDownAtLeft.addListener((lDownAtLeftEventListener*)this); 
-	}
-	
-	void lDownAtLeftEventListener::onRaise() {
-		Ex3::rotZ += 30;
-		glutSwapBuffers();
-#ifdef EX3DEBUG
-		std::cout << "lbtn down at leftside ";
-		std::cout << "rot: " << rotZ << "\n";
-#endif
-	}
-
-	lDownAtRightEventListener::lDownAtRightEventListener() { 
-		MouseCallback::lDownAtRight.addListener((lDownAtRightEventListener*)this); 
-	}
-	
-	void lDownAtRightEventListener::onRaise() {
-		Ex3::rotZ -= 30;
-		glutSwapBuffers();
-#ifdef EX3DEBUG
-		std::cout << "lbtn down at rightside ";
-		std::cout << "rot: " << rotZ << "\n";
-#endif
-
-	}
-	
-	mDownEventListener::mDownEventListener() { 
-		MouseCallback::mDown.addListener(this); 
-	}
-	
-	void mDownEventListener::onRaise() {
-		Ex3::rotZ += 6;
-	}
-
-	lDownAtLeftEventListener* lDownLeft;
-	lDownAtRightEventListener* lDownRight;
+	GLfloat rotZ = 0;
+	int mouseCurButton = -1;
 
 	void init() {
 		glEnable(GL_DEPTH_TEST);
@@ -54,18 +19,17 @@ namespace Ex3 {
 	void display() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glLoadIdentity();
-		glRotatef(rotZ, 0, 0, 1);
-
 		glPushMatrix();
-		
-		glColor3f(1.0, 0.0, 0.0); // red
-		glTranslatef(-0.5, 0, 0);
-		glutSolidCube(.33);
-		
-		glColor3f(0.0, 0.0, 1.0); // blue
-		glTranslatef(0.5, 0, 0);
-		glutSolidCube(.33);
+			glLoadIdentity();
+			glRotatef(rotZ, 0, 0, 1);
+			glPushMatrix();
+				glColor3f(1.0, 0.0, 0.0); // red
+				glTranslatef(-0.5, 0, 0);
+				glutSolidCube(.33);
+				glColor3f(0.0, 0.0, 1.0); // blue
+				glTranslatef(1.0, 0, 0);
+				glutSolidCube(.33);
+			glPopMatrix();
 		glPopMatrix();
 
 		glutSwapBuffers();
@@ -88,25 +52,39 @@ namespace Ex3 {
 #ifdef EX3DEBUG
 				std::cout << "lbtn down at x: " << x << "\n";
 #endif
-				//lDownAtLeft.raise();
 				rotZ += 30;
-				glutPostRedisplay();
 			}
 			else
 			{
 				// rotate scene clockwise
 #ifdef EX3DEBUG
-				std::cout << "mouse lbtn down at right size of screen\n";
+				std::cout << "lbtn down at x: " << x << "\n";
 #endif
-				//lDownAtRight.raise();
 				rotZ -= 30;
-				glutPostRedisplay();
 			}
+		}
+
+		if (button == GLUT_MIDDLE_BUTTON) {
+			mouseCurButton = state == GLUT_DOWN ? GLUT_MIDDLE_BUTTON : -1;
 		}
 	}
 
 	// move scene when mouse middle button's state is down
 	void ex3MouseMotion(int x, int y) {
-
+#ifdef EX3DEBUG
+		std::cout << "ex3MouseMotion called\n";
+#endif
+		if (mouseCurButton == GLUT_MIDDLE_BUTTON) {
+			// follow mouse position
+#ifdef EX3DEBUG
+			std::cout << "mouse middle button down\n";
+#endif
+			y = Constant::screen_height - y;
+			glViewport(x - Constant::screen_width / 2, 
+				y - Constant::screen_height / 2, 
+				Constant::screen_width, 
+				Constant::screen_height);
+			glutPostRedisplay();
+		}
 	}
 }

@@ -22,13 +22,11 @@
     <ClCompile Include="cube.cpp" />
     <ClCompile Include="Ex3.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mouse_callback.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
     <ClInclude Include="cube.h" />
     <ClInclude Include="Ex3.h" />
-    <ClInclude Include="mouse_callback.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
