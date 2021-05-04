@@ -12,25 +12,48 @@ namespace Ex3 {
 
 	void init() {
 		glEnable(GL_DEPTH_TEST);
-		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glClearColor(1.0, 1.0, 1.0, 0.0);
 		glLoadIdentity();
 	}
 
 	void display() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glPushMatrix();
+		glPushMatrix(); // draw axis
+			glBegin(GL_LINES);
+
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex3f(0.0, 0.0, 0.0);
+			glVertex3f(2.0, 0.0, 0.0);
+
+			glColor3f(0.0, 1.0, 0.0);
+			glVertex3f(0.0, 0.0, 0.0);
+			glVertex3f(0.0, 2.0, 0.0);
+
+			glColor3f(0.0, 0.0, 1.0);
+			glVertex3f(0.0, 0.0, 0.0);
+			glVertex3f(0.0, 0.0, 2.0);
+			glEnd();
+		glPopMatrix();
+
+		glPushMatrix(); // draw cube
 			glLoadIdentity();
 			glRotatef(rotZ, 0, 0, 1);
 			glPushMatrix();
-				glColor3f(1.0, 0.0, 0.0); // red
+				glColor3f(1.0, 0.0, 0.0); // red cube
 				glTranslatef(-0.5, 0, 0);
 				glutSolidCube(.33);
-				glColor3f(0.0, 0.0, 1.0); // blue
+				glColor3f(1.0, 1.0, 1.0);
+				glutWireCube(.33);
+				glColor3f(0.0, 0.0, 1.0); // blue cube
 				glTranslatef(1.0, 0, 0);
 				glutSolidCube(.33);
+				glColor3f(1.0, 1.0, 1.0);
+				glutWireCube(.33);
 			glPopMatrix();
 		glPopMatrix();
+
+		
 
 		glutSwapBuffers();
 	}
@@ -62,6 +85,10 @@ namespace Ex3 {
 #endif
 				rotZ -= 30;
 			}
+		}
+
+		if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
+			glViewport(0, 0, Constant::screen_width, Constant::screen_height);
 		}
 
 		if (button == GLUT_MIDDLE_BUTTON) {
