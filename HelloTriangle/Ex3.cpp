@@ -1,9 +1,9 @@
-#include "Ex3.h"
+#include "ex3.h"
 #include "constants.h"
 
 #define EX3DEBUG
 #ifdef EX3DEBUG
-	#include <iostream>
+#include <iostream>
 #endif
 
 namespace Ex3 {
@@ -69,7 +69,7 @@ namespace Ex3 {
 	void ex3MouseStatus(int button, int state, int x, int y) {
 		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 		{
-			if (x < Constant::screen_width / 2)
+			if (x < Constant::SCREEN_WIDTH / 2)
 			{
 				// rotate scene counterclockwise
 #ifdef EX3DEBUG
@@ -106,11 +106,11 @@ namespace Ex3 {
 #ifdef EX3DEBUG
 			std::cout << "mouse middle button down\n";
 #endif
-			y = Constant::screen_height - y;
-			glViewport(x - Constant::screen_width / 2, 
-				y - Constant::screen_height / 2, 
-				Constant::screen_width, 
-				Constant::screen_height);
+			y = Constant::SCREEN_HEIGHT - y;
+			glViewport(x - Constant::SCREEN_WIDTH / 2,
+				y - Constant::SCREEN_HEIGHT / 2,
+				Constant::SCREEN_WIDTH,
+				Constant::SCREEN_HEIGHT);
 			glutPostRedisplay();
 		}
 	}

@@ -11,7 +11,7 @@
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(Constant::screen_width, Constant::screen_height);
+	glutInitWindowSize(Constant::SCREEN_WIDTH, Constant::SCREEN_HEIGHT);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("15010951 S.G. Kang");
 
