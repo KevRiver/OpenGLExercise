@@ -38,9 +38,9 @@ void init() {
 	GLfloat whiteLightPosition[] = { 5.0, 5.0, -10.0 };
 	whiteLight.setPosition(whiteLightPosition);
 
-	GLfloat redLightPosition[] = { 5.0f, 5.0f, 10.0f };
-	GLfloat ambientColor[] = { 1.0f, 0.0f, 0.0f, 0.1f }; // red
-	GLfloat diffuseColor[] = { 1.0f, 0.0f, 0.0f, 0.9f }; // red
+	GLfloat redLightPosition[] = { 5.0f, -5.0f, -10.0f };
+	GLfloat ambientColor[] = { 0.25f, 0.0f, 0.0f, 0.1f }; // red
+	GLfloat diffuseColor[] = { 0.75f, 0.0f, 0.0f, 0.5f }; // red
 	redLight.setAmbientColor(ambientColor);
 	redLight.setDiffuseColor(diffuseColor);
 	redLight.setPosition(redLightPosition);
